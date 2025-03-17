@@ -1,0 +1,28 @@
+@(tasks: Seq[models.Task])
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de Tareas</title>
+    </head>
+    <body>
+        <h1>Lista de Tareas</h1>
+
+            <!-- Enlace para crear una nueva tarea -->
+        <a href="@routes.TaskController.createTask">Crear Nueva Tarea</a>
+
+            <!-- Lista de tareas -->
+        <ul>
+        @for(task <- tasks) {
+            <li>
+                @task.getDescripcion (@if(task.getCompletada()) {Completada} else {Pendiente})
+            <a href="@routes.TaskController.editTask(task.getId())">Editar</a>
+            <form action="@routes.TaskController.deleteTask(task.getId())" method="post" style="display:inline;">
+                <button type="submit">Eliminar</button>
+            </form>
+            </li>
+        }
+        </ul>
+    </body>
+</html>

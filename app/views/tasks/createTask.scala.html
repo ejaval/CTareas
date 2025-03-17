@@ -1,0 +1,28 @@
+@(taskForm: play.data.Form[models.Task])
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear Tarea</title>
+    </head>
+    <body>
+        <h1>Crear Tarea</h1>
+
+            <!-- Formulario para crear una nueva tarea -->
+        <form action="@routes.TaskController.saveTask()" method="post">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" value="@taskForm.field("descripcion").value().orElse("")" required>
+            <br>
+
+            <label for="completada">Completada:</label>
+            <input type="checkbox" id="completada" name="completada">
+            <br>
+
+            <button type="submit">Guardar</button>
+        </form>
+
+            <!-- Enlace para regresar a la lista de tareas -->
+        <a href="@routes.TaskController.listTasks">Volver a la Lista</a>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+@(taskForm: play.data.Form[models.Task])
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Editar Tarea</title>
+    </head>
+    <body>
+        <h1>Editar Tarea</h1>
+
+            <!-- Formulario para editar una tarea existente -->
+        <form action="@routes.TaskController.updateTask(taskForm.get().getId())" method="post">
+            <input type="hidden" name="id" value="@taskForm.field("id").value().orElse("")">
+
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" value="@taskForm.field("descripcion").value().orElse("")" required>
+            <br>
+
+            <label for="completada">Completada:</label>
+            <input type="checkbox" id="completada" name="completada">
+            <br>
+
+            <button type="submit">Actualizar</button>
+        </form>
+
+            <!-- Enlace para regresar a la lista de tareas -->
+        <a href="@routes.TaskController.listTasks">Volver a la Lista</a>
+    </body>
+</html>
